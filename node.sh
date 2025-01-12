@@ -41,4 +41,8 @@ cd skyportd || { echo_message "❌ Failed to enter directory skyportd"; exit 1; 
 echo_message "🔧 Installing dependencies... 📥"
 npm install
 
-echo_message "✅ Node and dependencies installed successfully! 🎉"
+# Install and update PM2
+echo_message "🔧 Installing and updating PM2... ⚡"
+npm install pm2 -g && pm2 update
+
+echo_message "✅ Node, dependencies, and PM2 installed successfully! 🎉"
