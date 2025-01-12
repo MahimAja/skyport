@@ -63,6 +63,27 @@ npm install pm2 -g && pm2 update
 
 echo_message "✅ Installed Files ✔️"
 
+echo_message "⚙️ Installing Ngrok... 🌐"
+
+# Install Ngrok
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+    | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+    && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+    | sudo tee /etc/apt/sources.list.d/ngrok.list \
+    && sudo apt update \
+    && sudo apt install ngrok -y
+
+echo_message "✅ Ngrok installed successfully! 🎉"
+
+# Prompt for Ngrok auth token
+echo_message "🔑 Please enter your Ngrok auth token: "
+read ngrok_auth_token
+
+# Configure Ngrok with the provided auth token
+ngrok config add-authtoken "$ngrok_auth_token"
+
+echo_message "✅ Ngrok configured successfully! 🎉"
+
 echo_message "🚀 Starting Skyport... 🔥"
 
 # Run setup scripts
@@ -71,8 +92,7 @@ npm run createUser
 
 echo_message "⚡ Starting Skyport with PM2... ⚡"
 
-# Install PM2 and start the application
-sudo npm install -g pm2
+# Start the application with PM2
 pm2 start index.js
 
 echo_message "🎉 Skyport Installed and Started on Port 3001 🌐"
