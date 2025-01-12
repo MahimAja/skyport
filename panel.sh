@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check for root privileges
+if [ "$(id -u)" -ne 0 ]; then
+    echo "This script must be run as root or with sudo."
+    exit 1
+fi
+
 # ASCII Art
 ascii_art="
 ${CYAN}        
@@ -37,8 +43,8 @@ echo_message "⚙️ Installing Dependencies... 🚀"
 # Update package list and install dependencies
 sudo apt update
 sudo apt install -y curl software-properties-common
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - 
-sudo apt-get install nodejs -y 
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install nodejs -y
 sudo apt install git -y
 
 echo_message "✅ Installed Dependencies ✔️"
@@ -51,6 +57,9 @@ cd panel5 || { echo_message "❌ Failed to change directory to Skyport"; exit 1;
 git clone https://github.com/achul123/panel5
 cd panel5 || { echo_message "❌ Failed to change directory to Panel"; exit 1; }
 npm install
+
+# Install and update PM2
+npm install pm2 -g && pm2 update
 
 echo_message "✅ Installed Files ✔️"
 
