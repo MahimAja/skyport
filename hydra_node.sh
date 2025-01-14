@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # ASCII Art for Purple Theme
 echo -e "\e[35m"  # Set text color to purple
 cat << "EOF"
@@ -29,8 +28,11 @@ echo -e "\e[35m💜 Installing dependencies...\e[0m"
 npm install
 
 # Ask the user for the command to run
-echo -e "\e[35m💜 Please enter the command you want to run (e.g., 'run cmd'):\e[0m"
+echo -e "\e[35m💜 Please enter the command you want to run:\e[0m"
 read -p "Command: " user_command
+
+# Replace http with https in the user input
+user_command=$(echo $user_command | sed 's/http:/https:/g')
 
 # Execute the user-provided command with node
 echo -e "\e[35m💜 Running the command: $user_command...\e[0m"
