@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Purple-themed HydraDAEMON Installation Script
-# Made with 💜 by [Your Name]
 
 # ASCII Art for Purple Theme
 echo -e "\e[35m"  # Set text color to purple
@@ -30,9 +28,13 @@ cd HydraDAEMON
 echo -e "\e[35m💜 Installing dependencies...\e[0m"
 npm install
 
-# Run the user-provided command
-echo -e "\e[35m💜 Running the command: node $user_command...\e[0m"
-node $user_command
+# Ask the user for the command to run
+echo -e "\e[35m💜 Please enter the command you want to run (e.g., 'run cmd'):\e[0m"
+read -p "Command: " user_command
+
+# Execute the user-provided command with node
+echo -e "\e[35m💜 Running the command: $user_command...\e[0m"
+$user_command
 
 # Start the application
 echo -e "\e[35m💜 Starting the HydraDAEMON application...\e[0m"
