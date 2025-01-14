@@ -56,9 +56,4 @@ echo -e "\e[35m💜 Ngrok setup complete! You can use Ngrok to expose your local
 echo -e "\e[35m💜 Starting the Oversee application...\e[0m"
 node .
 
-# Provide instructions for using Ngrok
-echo -e "\e[35m💜 To start Ngrok, use the following command:\e[0m"
-echo -e "\e[33mngrok http 3000\e[0m"
-echo -e "\e[35m💜 Replace '3000' with the port your application is running on if different.\e[0m"
-
 echo -e "\e[35m💜 Setup complete! Enjoy using Oversee. 💜\e[0m"
