@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# Check for root privileges
-if [ "$(id -u)" -ne 0 ]; then
-    echo "This script must be run as root or with sudo."
-    exit 1
-fi
+# Purple-themed Hydra Panel Installation Script
+# Made with 💜 by [Your Name]
 
-# ASCII Art
-ascii_art="
-${CYAN}        
+# ASCII Art for Purple Theme
+echo -e "\e[35m"  # Set text color to purple
+cat << "EOF"
  ██████   ██████   █████████   █████   █████ █████ ██████   ██████    ███████    ███████████ 
 ░░██████ ██████   ███░░░░░███ ░░███   ░░███ ░░███ ░░██████ ██████   ███░░░░░███ ░░███░░░░░███
  ░███░█████░███  ░███    ░███  ░███    ░███  ░███  ░███░█████░███  ███     ░░███ ░███    ░███
@@ -17,70 +14,44 @@ ${CYAN}
  ░███      ░███  ░███    ░███  ░███    ░███  ░███  ░███      ░███ ░░███     ███  ░███        
  █████     █████ █████   █████ █████   █████ █████ █████     █████ ░░░███████░   █████       
 ░░░░░     ░░░░░ ░░░░░   ░░░░░ ░░░░░   ░░░░░ ░░░░░ ░░░░░     ░░░░░    ░░░░░░░    ░░░░░        
-                                                                                                                                                                                  
+                                            
+EOF
+echo -e "\e[0m"  # Reset text color
 
-${NC}
-"
-
-# Colors
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-YELLOW='\033[0;33m'
-MAGENTA='\033[0;35m'
-WHITE='\033[1;37m'
-NC='\033[0m' # No Color
-
-echo -e "${CYAN}$ascii_art${NC}"
-
-# Function to display messages with colors
-echo_message() {
-    echo -e "${MAGENTA}$1${NC}"
-}
-
-echo_message "💥 Do you want to install Hydra panel (yes/no)? 🤔"
-read answer
-
-if [ "$answer" != "yes" ]; then
-    echo_message "❌ Installation aborted. 💀"
-    exit 0
-fi
-
-echo_message "⚙️ Installing Dependencies... 🚀"
-
-# Update package list and install dependencies
+# Update the package list
+echo -e "\e[35m💜 Updating package list...\e[0m"
 sudo apt update
-sudo apt install -y curl software-properties-common
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - 
-sudo apt-get install nodejs -y
-sudo apt install git -y
 
-echo_message "✅ Installed Dependencies ✔️"
+# Install Node.js and Git
+echo -e "\e[35m💜 Installing Node.js and Git...\e[0m"
+sudo apt install -y nodejs git
 
-echo_message "📂 Installing Files... 📥"
-
-# Clone repository, rename, and install
-mkdir -p hydra
-cd hydra || { echo_message "❌ Failed to create directory"; exit 1; }
+# Clone the Hydra Panel repository
+echo -e "\e[35m💜 Cloning Hydra Panel repository...\e[0m"
 git clone https://github.com/hydralabs-beta/panel
-cd panel || { echo_message "❌ Failed to change directory to Panel"; exit 1; }
+
+# Rename the cloned folder to 'hydra'
+echo -e "\e[35m💜 Renaming 'panel' to 'hydra'...\e[0m"
+mv panel hydra
+
+# Navigate into the 'hydra' directory
+echo -e "\e[35m💜 Navigating into the 'hydra' directory...\e[0m"
+cd hydra
+
+# Install dependencies
+echo -e "\e[35m💜 Installing dependencies...\e[0m"
 npm install
 
-echo_message "✅ Installed Files ✔️"
-
-echo_message "⚙️ Running Setup... 🌐"
-
-# Run setup scripts
+# Seed the database
+echo -e "\e[35m💜 Seeding the database...\e[0m"
 npm run seed
+
+# Create a new user
+echo -e "\e[35m💜 Creating a new user...\e[0m"
 npm run createUser
 
-echo_message "⚡ Starting Hydra... ⚡"
-
-# Start the application using node
+# Start the application
+echo -e "\e[35m💜 Starting the Hydra Panel...\e[0m"
 node .
 
-echo_message "🎉 Hydra Installed and Started! 🌐"
-
-# Subscription message with emojis
-echo -e "${YELLOW}🔔 Subscribe to: ${WHITE}https://youtube.com/@mahimking11 ${CYAN}💻💡${NC}"
+echo -e "\e[35m💜 Installation and setup complete! Enjoy your Hydra Panel. 💜\e[0m"
