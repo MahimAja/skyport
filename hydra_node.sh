@@ -30,10 +30,6 @@ cd HydraDAEMON
 echo -e "\e[35m💜 Installing dependencies...\e[0m"
 npm install
 
-# Ask user for a command to run with node
-echo -e "\e[35m💜 Please enter the command node token command:\e[0m"
-read -p "Command: " user_command
-
 # Run the user-provided command
 echo -e "\e[35m💜 Running the command: node $user_command...\e[0m"
 node $user_command
