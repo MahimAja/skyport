@@ -50,6 +50,21 @@ npm run seed
 echo -e "\e[35m💜 Creating a new user...\e[0m"
 npm run createUser
 
+# Install Ngrok
+echo -e "\e[35m💜 Installing Ngrok...\e[0m"
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+	| sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+	&& echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+	| sudo tee /etc/apt/sources.list.d/ngrok.list \
+	&& sudo apt update \
+	&& sudo apt install ngrok
+
+echo -e "\e[35m💜 Please enter your Ngrok auth token:\e[0m"
+read -p "Auth Token: " the_auth_token
+ngrok config add-authtoken $the_auth_token
+
+echo -e "\e[35m💜 Ngrok setup complete!\e[0m"
+
 # Start the application
 echo -e "\e[35m💜 Starting the Hydra Panel...\e[0m"
 node .
